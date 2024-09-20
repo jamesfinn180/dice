@@ -1,0 +1,22 @@
+@use '@styles/colours' as c;
+
+.App {
+  text-align: center;
+  color: white;
+  background-image: linear-gradient(
+    90deg,
+    c.$purple,
+    hsl(281deg 100% 21%) 17%,
+    hsl(304deg 100% 23%) 31%,
+    hsl(319deg 100% 30%) 43%,
+    hsl(329deg 100% 36%) 53%,
+    hsl(336deg 100% 41%) 61%,
+    c.$pink,
+    hsl(3deg 95% 61%) 74%,
+    hsl(17deg 100% 59%) 79%,
+    hsl(30deg 100% 55%) 83%,
+    hsl(40deg 100% 50%) 88%,
+    hsl(48deg 100% 50%) 93%,
+    c.$yellow,
+  );
+}
