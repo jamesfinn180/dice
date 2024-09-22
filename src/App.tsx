@@ -3,8 +3,11 @@ import styles from './App.module.scss'
 import { DiceGrid } from '@components/DiceGrid/DiceGrid'
 import { RollsOutput } from '@components/RollsOutput/RollsOutput'
 import { UI } from '@components/UI/UI'
+import useFullHeight from '@hooks/useHullHeight'
 
 const App: React.FC = () => {
+  useFullHeight()
+
   return (
     <div className={styles.App}>
       <div className={styles.Page}>
