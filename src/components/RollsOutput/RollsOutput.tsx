@@ -18,9 +18,8 @@ export const RollsOutput: React.FC = () => {
     return dArr.map((d, i) => {
       const rollsLength = d.rolls.length
       return (
-        <>
+        <span key={d.name}>
           <span
-            key={d.name}
             className={styles.Outcome}
             style={{ borderColor: getDiceColour(d.name) }}
           >
@@ -32,7 +31,7 @@ export const RollsOutput: React.FC = () => {
             <span>[{sumArray(d.rolls)}]</span>
           </span>
           {i !== dLength - 1 && ' + '}
-        </>
+        </span>
       )
     })
   }

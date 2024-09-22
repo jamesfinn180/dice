@@ -1,3 +1,5 @@
+import { DiceNames } from '@datatypes/dice'
+
 export const getDiceColour = (dice: string) => {
   switch (dice) {
     case 'd20':
@@ -23,3 +25,7 @@ export const getRandNum = (min: number, max: number): number => {
 
 export const sumArray = (arr: number[]): number =>
   arr.reduce((sum, n) => sum + n, 0)
+
+export const getNumFromDice = (diceName: DiceNames): number => {
+  return parseInt(diceName.slice(1))
+}

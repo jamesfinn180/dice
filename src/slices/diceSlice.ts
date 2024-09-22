@@ -1,15 +1,17 @@
-import { IDice, IDiceRolled } from '@datatypes/dice'
+import { IDice, IDiceRolled, IRoll } from '@datatypes/dice'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getDiceColour } from '@utils/utils'
 import { AppThunk } from '../store'
+import { setSavedRollsStorage } from '@storage/storage'
 
 interface IInitialState {
   dices: IDice[]
   rollsTotal: number
   modifier: number
+  savedRolls: IRoll[]
 }
 
-const initialDiceState: IInitialState = {
+export const initialDiceState: IInitialState = {
   dices: [
     {
       name: 'd20',
@@ -50,6 +52,7 @@ const initialDiceState: IInitialState = {
   ],
   rollsTotal: 0,
   modifier: 0,
+  savedRolls: [],
 }
 
 export const diceSlice = createSlice({
@@ -82,6 +85,24 @@ export const diceSlice = createSlice({
         }, 0) + state.modifier
       state.rollsTotal = total
     },
+    saveRoll: (state, action: PayloadAction<string>) => {
+      const roll = {} as IRoll
+      roll.name = action.payload
+      roll.dices = state.dices
+        .map((d) => {
+          return { [d.name]: d.rolls.length }
+        })
+        .reduce((acc, current) => {
+          return { ...acc, ...current }
+        })
+      roll.modifier = state.modifier
+      setSavedRollsStorage(roll)
+
+      state.savedRolls.push(roll)
+    },
+    setAllSavedRolls: (state, action: PayloadAction<IRoll[]>) => {
+      state.savedRolls = action.payload
+    },
   },
 })
 
@@ -99,7 +120,13 @@ export const modifierAndCalcTotal =
     dispatch(calculateRollsTotal())
   }
 
-export const { setRolls, clearRolls, setModifier, calculateRollsTotal } =
-  diceSlice.actions
+export const {
+  setRolls,
+  clearRolls,
+  setModifier,
+  calculateRollsTotal,
+  saveRoll,
+  setAllSavedRolls,
+} = diceSlice.actions
 
 export default diceSlice.reducer
