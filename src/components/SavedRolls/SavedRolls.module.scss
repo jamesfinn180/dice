@@ -8,10 +8,24 @@
 }
 
 .SavedRoll {
+  display: inline-flex;
+  gap: 6px;
   background: black;
   color: white;
-  padding: 5px 10px;
-  border-radius: 15px;
-  display: inline-block;
-  cursor: pointer;
+  padding: 0 0 0 5px;
+  border-radius: 30px;
+
+  &__Btn {
+    color: white;
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+
+    &_delete {
+      padding-right: 10px;
+    }
+  }
 }

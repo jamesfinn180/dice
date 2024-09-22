@@ -27,6 +27,10 @@
 
   }
 
+  &:disabled {
+    color: rgb(162, 162, 162);
+  }
+
   &_modifier {
     grid-column: 1 / 3;
   }

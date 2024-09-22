@@ -1,4 +1,3 @@
-// import { LOCAL_STORAGE_PREFIX } from '@consts/game'
 import { APP_LOCAL_STORAGE_PREFIX } from '@consts/consts'
 import { IRoll } from '@datatypes/dice'
 import { initialDiceState } from '@slices/diceSlice'
@@ -17,4 +16,8 @@ export const setSavedRollsStorage = (newSavedRoll: IRoll) => {
   const savedRolls = getSavedRollsStorage()
   savedRolls.push(newSavedRoll)
   localStorage.setItem(SAVED_ROLLS_STORAGE, JSON.stringify(savedRolls))
+}
+
+export const setAllSavedRollsStorage = (allSavedRolls: IRoll[]) => {
+  localStorage.setItem(SAVED_ROLLS_STORAGE, JSON.stringify(allSavedRolls))
 }

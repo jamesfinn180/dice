@@ -3,14 +3,21 @@ import styles from './SavedRolls.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/store'
 import { DiceNames, IRoll } from '@datatypes/dice'
-import { setModifier, rollAndCalcTotal } from '@slices/diceSlice'
+import {
+  setModifier,
+  rollAndCalcTotal,
+  deleteSavedRoll,
+  clearRolls,
+} from '@slices/diceSlice'
 import { getNumFromDice, getRandNum } from '@utils/utils'
+import clsx from 'clsx'
 
 export const SavedRolls: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { savedRolls } = useSelector((state: RootState) => state.dices)
 
   const clickSavedRoll = (name: string) => {
+    dispatch(clearRolls())
     const savedRoll = savedRolls.find((roll) => roll.name === name) as IRoll
 
     dispatch(setModifier(savedRoll.modifier || 0))
@@ -30,18 +37,35 @@ export const SavedRolls: React.FC = () => {
     })
   }
 
+  const clickDeleteSave = (name: string) => {
+    dispatch(deleteSavedRoll(name))
+  }
+
   return (
     <div className={styles.Container}>
       {savedRolls.length > 0 &&
         savedRolls.map((roll: IRoll) => {
           return (
-            <button
-              key={roll.name}
-              className={styles.SavedRoll}
-              onClick={() => clickSavedRoll(roll.name)}
-            >
-              {roll.name}
-            </button>
+            <span key={roll.name} className={styles.SavedRoll}>
+              <button
+                className={clsx(
+                  styles.SavedRoll__Btn,
+                  styles.SavedRoll__Btn_save
+                )}
+                onClick={() => clickSavedRoll(roll.name)}
+              >
+                {roll.name}
+              </button>
+              <button
+                className={clsx(
+                  styles.SavedRoll__Btn,
+                  styles.SavedRoll__Btn_delete
+                )}
+                onClick={() => clickDeleteSave(roll.name)}
+              >
+                x
+              </button>
+            </span>
           )
         })}
     </div>

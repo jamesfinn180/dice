@@ -11,7 +11,7 @@ export const RollsOutput: React.FC = () => {
   )
   const outComes = dices.filter((d) => !!d.rolls.length)
 
-  if (!rollsTotal) return null
+  if (rollsTotal === null) return null
 
   const formatDiceNotations = (dArr: IDice[]) => {
     const dLength = dArr.length

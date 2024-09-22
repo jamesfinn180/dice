@@ -10,6 +10,7 @@ import { Modal } from '@components/Modal/Modal'
 export const UI: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [showModal, setShowModal] = useState<boolean>(false)
+  const { rollsTotal } = useSelector((state: RootState) => state.dices)
   const closeModal = () => {
     setShowModal(false)
   }
@@ -19,6 +20,7 @@ export const UI: React.FC = () => {
       <SelectBox />
       <button
         className={clsx(styles.Button, styles.Button_save)}
+        disabled={rollsTotal === null}
         onClick={() => {
           setShowModal(true)
         }}
