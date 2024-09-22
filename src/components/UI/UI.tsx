@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from 'src/store'
 import { clearRolls, saveRoll } from '@slices/diceSlice'
 import { SelectBox } from '@components/SelectBox/SelectBox'
 import { Modal } from '@components/Modal/Modal'
+import { RollsOutput } from '@components/RollsOutput/RollsOutput'
 
 export const UI: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -49,7 +50,6 @@ interface ISaveModal {
 const SaveModal: React.FC<ISaveModal> = (props) => {
   const { closeModal } = props
   const dispatch = useDispatch<AppDispatch>()
-  const { dices, modifier } = useSelector((state: RootState) => state.dices)
   const [inputValue, setInputValue] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -59,17 +59,6 @@ const SaveModal: React.FC<ISaveModal> = (props) => {
     }
   }, [])
 
-  const formatRoll = () => {
-    return dices
-      .filter((d) => {
-        return d.rolls.length > 0
-      })
-      .map((d) => {
-        return `${d.rolls.length}${d.name}`
-      })
-      .join(' + ')
-  }
-
   const handleSave = () => {
     dispatch(saveRoll(inputValue))
     closeModal()
@@ -78,9 +67,7 @@ const SaveModal: React.FC<ISaveModal> = (props) => {
   return (
     <>
       <h2>Save Rolls as...</h2>
-      <p>
-        {formatRoll()} {modifier !== 0 && modifier}
-      </p>
+      <RollsOutput />
       <input
         type="text"
         value={inputValue}

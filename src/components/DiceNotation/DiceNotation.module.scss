@@ -1,0 +1,25 @@
+.Outcome {
+  display: inline-flex;
+  padding: 2px;
+  border-bottom: solid 5px;
+  margin-bottom: -5px;
+  gap: 2px;
+
+  &__Label {
+    font-weight: 700;
+    color: black;
+  }
+
+  &__Total {
+    font-size: 24px;
+    font-weight: 900;
+  }
+
+  &__Modifier {
+    background: black;
+    border-radius: 50%;
+    color: white;
+    width: 20px;
+    text-align: center;
+  }
+}
