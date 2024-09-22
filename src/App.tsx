@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from './App.module.scss'
-import { useSelector, useDispatch } from 'react-redux'
-import { AppDispatch, RootState } from 'src/store'
-import { setProject } from '@slices/storeSlice'
+import { DiceGrid } from '@components/DiceGrid/DiceGrid'
+import { RollsOutput } from '@components/RollsOutput/RollsOutput'
+import { UI } from '@components/UI/UI'
 
 const App: React.FC = () => {
-  const { name, project } = useSelector((state: RootState) => state.game)
-  const dispatch = useDispatch<AppDispatch>()
-
-  useEffect(() => {
-    dispatch(setProject('Boilerplate'))
-  }, [])
-
   return (
     <div className={styles.App}>
-      <h1 className={styles.Title}>
-        {name} : {project}
-      </h1>
+      <div className={styles.Page}>
+        <DiceGrid />
+        <RollsOutput />
+        <div className={styles.UIContainer}>
+          <div className={styles.Gap} />
+          <UI />
+          {/* SavedRolls */}
+          {/* Reset & Modifier */}
+        </div>
+      </div>
     </div>
   )
 }

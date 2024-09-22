@@ -1,0 +1,112 @@
+.customSelect {
+  position: relative;
+  grid-column: 1 / 3;
+
+  .selectButton {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    font-family: sans-serif;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    .modalContent {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(5, 1fr);
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      overflow-y: scroll;
+      position: relative;
+
+      &::-webkit-scrollbar {
+        width: 0;
+      }
+    
+      & {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .options {
+        display: contents;
+
+        .optionButton {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #f0f0f0;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #e0e0e0;
+          }
+        }
+      }
+
+      .closeButton {
+        grid-column: 1/6;
+        margin-top: 15px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ff4d4d;
+        color: white;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #ff1a1a;
+        }
+      }
+    }
+  }
+}
+
+.selected {
+  background-color: #cce5ff !important;
+  border-color: #007bff !important; 
+}
+
+.centreSelect {
+  grid-column: 1/6;
+}
+
+.modifier {
+  display: inline-block;
+  background: black;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

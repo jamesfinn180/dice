@@ -1,7 +1,7 @@
 {
-  "name": "james-boilerplate",
+  "name": "dice",
   "version": "0.1.0",
-  "homepage": "https://jamesfinn180.github.io/james-boilerplate",
+  "homepage": "https://jamesfinn180.github.io/dice",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",

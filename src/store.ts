@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import storeReducer from './slices/storeSlice'
+import diceReducer from './slices/diceSlice'
 import { ThunkAction } from 'redux-thunk'
 import { Action } from 'redux'
 
 const store = configureStore({
   reducer: {
-    game: storeReducer,
+    dices: diceReducer,
   },
 })
 
