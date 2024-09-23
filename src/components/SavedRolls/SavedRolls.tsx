@@ -46,7 +46,11 @@ export const SavedRolls: React.FC = () => {
       {savedRolls.length > 0 &&
         savedRolls.map((roll: IRoll) => {
           return (
-            <span key={roll.name} className={styles.SavedRoll}>
+            <span
+              key={roll.name}
+              className={styles.SavedRoll}
+              style={{ background: roll.colour }}
+            >
               <button
                 className={clsx(
                   styles.SavedRoll__Btn,

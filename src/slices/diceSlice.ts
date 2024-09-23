@@ -9,6 +9,7 @@ interface IInitialState {
   rollsTotal: number | null
   modifier: number
   savedRolls: IRoll[]
+  isGrid: boolean
 }
 
 export const initialDiceState: IInitialState = {
@@ -53,6 +54,7 @@ export const initialDiceState: IInitialState = {
   rollsTotal: null,
   modifier: 0,
   savedRolls: [],
+  isGrid: true,
 }
 
 export const diceSlice = createSlice({
@@ -85,9 +87,13 @@ export const diceSlice = createSlice({
         }, 0) + state.modifier
       state.rollsTotal = total
     },
-    saveRoll: (state, action: PayloadAction<string>) => {
+    saveRoll: (
+      state,
+      action: PayloadAction<{ name: string; colour: string }>
+    ) => {
       const roll = {} as IRoll
-      roll.name = action.payload
+      roll.name = action.payload.name
+      roll.colour = action.payload.colour
       roll.dices = state.dices
         .map((d) => {
           return { [d.name]: d.rolls.length }
@@ -110,6 +116,9 @@ export const diceSlice = createSlice({
     },
     setAllSavedRolls: (state, action: PayloadAction<IRoll[]>) => {
       state.savedRolls = action.payload
+    },
+    toggleIsGrid: (state) => {
+      state.isGrid = !state.isGrid
     },
   },
 })
@@ -136,6 +145,7 @@ export const {
   saveRoll,
   setAllSavedRolls,
   deleteSavedRoll,
+  toggleIsGrid,
 } = diceSlice.actions
 
 export default diceSlice.reducer

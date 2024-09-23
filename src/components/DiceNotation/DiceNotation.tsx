@@ -5,9 +5,10 @@ import { getDiceColour, sumArray } from '@utils/utils'
 
 interface IDiceNotation {
   dArr: IDice[]
+  showSubtotal?: boolean
 }
 export const DiceNotation: React.FC<IDiceNotation> = (props) => {
-  const { dArr } = props
+  const { dArr, showSubtotal = true } = props
   const dLength = dArr.length
 
   return (
@@ -25,7 +26,7 @@ export const DiceNotation: React.FC<IDiceNotation> = (props) => {
                 {d.name}
               </span>
 
-              <span>[{sumArray(d.rolls)}]</span>
+              {showSubtotal && <span>[{sumArray(d.rolls)}]</span>}
             </span>
             {i !== dLength - 1 && ' + '}
           </span>

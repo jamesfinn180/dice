@@ -7,19 +7,28 @@ import {
   ModifierNotation,
 } from '@components/DiceNotation/DiceNotation'
 
-export const RollsOutput: React.FC = () => {
+interface IRollsOutput {
+  showSubtotal?: boolean
+  showTotal?: boolean
+}
+export const RollsOutput: React.FC<IRollsOutput> = (props) => {
   const { rollsTotal, dices, modifier } = useSelector(
     (state: RootState) => state.dices
   )
+  const { showSubtotal = true, showTotal = true } = props
   const outComes = dices.filter((d) => !!d.rolls.length)
 
   if (rollsTotal === null) return null
 
   return (
     <p className={styles.Container}>
-      <DiceNotation dArr={outComes} />
-      <>{!!modifier && <ModifierNotation modifier={modifier} />}</> ={' '}
-      <span className={styles.Outcome__Total}>[{rollsTotal}]</span>
+      <DiceNotation dArr={outComes} showSubtotal={showSubtotal} />
+      <>{!!modifier && <ModifierNotation modifier={modifier} />}</>
+      {showTotal && (
+        <>
+          = <span className={styles.Outcome__Total}>[{rollsTotal}]</span>
+        </>
+      )}
     </p>
   )
 }

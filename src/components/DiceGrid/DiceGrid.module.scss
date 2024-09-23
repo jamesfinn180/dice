@@ -23,7 +23,7 @@
   background: white;
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.2s;
+  transition: all 0.4s;
 
   &:active {
     opacity: 0.8;
@@ -35,11 +35,6 @@
   }
 
   &__Title {
-    //position: absolute;
-    //top: 0;
-    //left: 5px;
-    //margin: 0;
-    //padding: 0;
     color: inherit;
     text-shadow: 2px 2px 0 white;
     font-size: 40px;
@@ -63,6 +58,8 @@
     transform: translateY(-50%);
     height: 60px;
     margin-left: 40px;
+    opacity: 0.3;
+    filter:grayscale(1)
   }
 
   &__Rolls {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './DiceGrid.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/store'
@@ -18,15 +18,14 @@ const imgUrls = {
 }
 
 export const DiceGrid: React.FC = () => {
-  const { dices } = useSelector((state: RootState) => state.dices)
-  const [isFlat, setIsFlat] = useState<boolean>(false)
+  const { dices, isGrid } = useSelector((state: RootState) => state.dices)
 
   return (
     <div
-      className={clsx(styles.Container, { [styles.Container_flat]: isFlat })}
+      className={clsx(styles.Container, { [styles.Container_flat]: isGrid })}
     >
       {dices.map((d: IDice) => {
-        return <Dice key={d.name} dice={d} isFlat={isFlat} />
+        return <Dice key={d.name} dice={d} isGrid={isGrid} />
       })}
     </div>
   )
@@ -34,12 +33,12 @@ export const DiceGrid: React.FC = () => {
 
 interface IDiceProps {
   dice: IDice
-  isFlat: boolean
+  isGrid: boolean
 }
 const Dice: React.FC<IDiceProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>()
-  const { dice, isFlat } = props
-  const { rolls, num, colour } = dice
+  const { dice, isGrid } = props
+  const { name, rolls, num, colour } = dice
 
   const rollDice = () => {
     const randNum = getRandNum(1, num)
@@ -48,7 +47,7 @@ const Dice: React.FC<IDiceProps> = (props) => {
 
   return (
     <button
-      className={clsx(styles.Dice, { [styles.Dice_flat]: isFlat })}
+      className={clsx(styles.Dice, { [styles.Dice_flat]: isGrid })}
       style={{ background: colour }}
       onClick={rollDice}
     >
@@ -56,8 +55,8 @@ const Dice: React.FC<IDiceProps> = (props) => {
         {num}
       </span>
 
-      {/* <img className={styles.Dice__Img} src={imgUrls[name]} alt="dice" /> */}
-      <img className={styles.Dice__Img} src={d20i} alt="dice" />
+      <img className={styles.Dice__Img} src={imgUrls[name]} alt="dice" />
+      {/* <img className={styles.Dice__Img} src={d20i} alt="dice" /> */}
 
       {rolls.length > 0 && (
         <span className={styles.Dice__Result}>{rolls.at(-1)}</span>
@@ -68,7 +67,7 @@ const Dice: React.FC<IDiceProps> = (props) => {
           <>
             {rolls.join(', ')} <br />
             <span className={styles.Dice__Rolls__Total}>
-              {'['} {rolls.reduce((a, b) => a + b)} {']'}
+              [ {rolls.reduce((a, b) => a + b)} ]
             </span>
           </>
         )}

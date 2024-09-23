@@ -14,6 +14,7 @@ export interface IDiceRolled {
 
 export interface IRoll {
   name: string
+  colour: string
   dices?: IRollDices
   modifier?: number
 }
