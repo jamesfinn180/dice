@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './HistoryRolls.module.scss'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/store'
@@ -7,9 +7,23 @@ import {
   DiceNotation,
   ModifierNotation,
 } from '@components/DiceNotation/DiceNotation'
+import clsx from 'clsx'
 
 export const HistoryRolls: React.FC = () => {
   const { historyRolls } = useSelector((state: RootState) => state.dices)
+  const [shouldAnimate, setShouldAnimate] = useState(false)
+
+  useEffect(() => {
+    if (historyRolls.length > 0) {
+      setShouldAnimate(true)
+
+      const timer = setTimeout(() => {
+        setShouldAnimate(false)
+      }, 750)
+
+      return () => clearTimeout(timer)
+    }
+  }, [historyRolls])
 
   return (
     <div className={styles.HistoryContainer}>
@@ -23,7 +37,12 @@ export const HistoryRolls: React.FC = () => {
             return { ...acc, ...current }
           })
         return (
-          <p key={i} className={styles.HistoryPara}>
+          <p
+            key={i}
+            className={clsx(styles.HistoryPara, {
+              [styles.HistoryPara_anim]: i === 0 && shouldAnimate,
+            })}
+          >
             {hRoll.rollName && (
               <span className={styles.HistoryTitle}>{hRoll.rollName}:</span>
             )}

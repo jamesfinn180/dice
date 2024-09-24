@@ -27,7 +27,6 @@ const App: React.FC = () => {
         <RollsOutput />
         <HistoryRolls />
         <div className={styles.UIContainer}>
-          <div className={styles.Gap} />
           <SavedRolls />
           <UI />
         </div>

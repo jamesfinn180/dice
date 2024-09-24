@@ -1,13 +1,19 @@
+@use '@styles/animation';
+
 .HistoryPara {
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
   align-items: center;
-  transition: scale(0.8);
   gap: 4px;
   padding-right: 24px;
   margin: 10px 0;
-  transform-origin:right;
-  transform: scale(0.8)
+  transform-origin: right;
+  transform: scale(0.8);
+
+  &_anim {
+    transform: scale(0);
+    animation: 0.75s slideGrow forwards;
+  }
 }
 
 .HistoryContainer {

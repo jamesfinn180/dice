@@ -18,7 +18,7 @@ export const RollsOutput: React.FC<IRollsOutput> = (props) => {
   const { showSubtotal = true, showTotal = true } = props
   const outComes = dices.filter((d) => !!d.rolls.length)
 
-  if (rollsTotal === null) return null
+  if (rollsTotal === null) return <p className={styles.Container}>...</p>
 
   return (
     <p className={styles.Container}>

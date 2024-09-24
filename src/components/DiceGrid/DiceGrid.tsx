@@ -51,17 +51,30 @@ const Dice: React.FC<IDiceProps> = (props) => {
       style={{ background: colour }}
       onClick={rollDice}
     >
-      <span className={styles.Dice__Title} style={{ color: colour }}>
+      <span
+        className={clsx(styles.Dice__Title, {
+          [styles.Dice__Title_flat]: isGrid,
+        })}
+        style={{ color: colour }}
+      >
         {num}
       </span>
 
-      <img className={styles.Dice__Img} src={imgUrls[name]} alt="dice" />
+      <img
+        className={clsx(styles.Dice__Img, { [styles.Dice__Img_flat]: isGrid })}
+        src={imgUrls[name]}
+        alt="dice"
+      />
 
       {rolls.length > 0 && (
         <span className={styles.Dice__Result}>{rolls.at(-1)}</span>
       )}
 
-      <aside className={styles.Dice__Rolls}>
+      <aside
+        className={clsx(styles.Dice__Rolls, {
+          [styles.Dice__Rolls_flat]: isGrid,
+        })}
+      >
         {rolls.length > 0 && (
           <>
             {rolls.join(', ')} <br />
