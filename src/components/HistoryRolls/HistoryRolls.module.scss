@@ -1,0 +1,14 @@
+.HistoryPara {
+  display: flex;
+  justify-content: right;
+  transition: scale(0.8);
+  gap: 4px;
+  padding-right: 24px;
+  margin: 10px 0;
+  transform-origin:right;
+  transform: scale(0.8)
+}
+
+.HistoryContainer {
+  background: #f3f3f3;
+}

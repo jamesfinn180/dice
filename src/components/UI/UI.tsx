@@ -3,7 +3,12 @@ import styles from './UI.module.scss'
 import clsx from 'clsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/store'
-import { clearRolls, saveRoll, toggleIsGrid } from '@slices/diceSlice'
+import {
+  clearRolls,
+  clearHistory,
+  saveRoll,
+  toggleIsGrid,
+} from '@slices/diceSlice'
 import { SelectBox } from '@components/SelectBox/SelectBox'
 import { Modal } from '@components/Modal/Modal'
 import { RollsOutput } from '@components/RollsOutput/RollsOutput'
@@ -11,14 +16,25 @@ import { RollsOutput } from '@components/RollsOutput/RollsOutput'
 export const UI: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [showModal, setShowModal] = useState<boolean>(false)
-  const { rollsTotal, isGrid } = useSelector((state: RootState) => state.dices)
+  const { rollsTotal, isGrid, historyRolls } = useSelector(
+    (state: RootState) => state.dices
+  )
   const closeModal = () => {
     setShowModal(false)
   }
 
   return (
     <div className={styles.Container}>
+      {/* Modifier */}
       <SelectBox />
+
+      <button
+        className={clsx(styles.Button, styles.Button_clear)}
+        onClick={() => dispatch(clearRolls())}
+      >
+        Clear
+      </button>
+
       <button
         className={clsx(styles.Button, styles.Button_save)}
         disabled={rollsTotal === null}
@@ -28,6 +44,7 @@ export const UI: React.FC = () => {
       >
         Save Roll
       </button>
+
       <button
         className={clsx(styles.Button, styles.Button_grid)}
         onClick={() => {
@@ -36,11 +53,13 @@ export const UI: React.FC = () => {
       >
         {isGrid ? 'Rows' : 'Grids'}
       </button>
+
       <button
-        className={clsx(styles.Button, styles.Button_clear)}
-        onClick={() => dispatch(clearRolls())}
+        className={clsx(styles.Button, styles.Button_clearHistory)}
+        onClick={() => dispatch(clearHistory())}
+        disabled={historyRolls.length === 0}
       >
-        Clear
+        Clear History
       </button>
 
       {showModal && (

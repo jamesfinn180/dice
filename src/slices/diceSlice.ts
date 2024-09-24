@@ -1,4 +1,4 @@
-import { IDice, IDiceRolled, IRoll } from '@datatypes/dice'
+import { IDice, IDiceRolled, IRoll, IHistoryRoll } from '@datatypes/dice'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getDiceColour } from '@utils/utils'
 import { AppThunk } from '../store'
@@ -10,6 +10,7 @@ interface IInitialState {
   modifier: number
   savedRolls: IRoll[]
   isGrid: boolean
+  historyRolls: IHistoryRoll[]
 }
 
 export const initialDiceState: IInitialState = {
@@ -55,6 +56,7 @@ export const initialDiceState: IInitialState = {
   modifier: 0,
   savedRolls: [],
   isGrid: true,
+  historyRolls: [],
 }
 
 export const diceSlice = createSlice({
@@ -67,14 +69,32 @@ export const diceSlice = createSlice({
         d.rolls.push(action.payload.rolledNum)
       }
     },
+
+    clearHistory: (state) => {
+      state.historyRolls = initialDiceState.historyRolls
+    },
+
     clearRolls: (state) => {
+      // Store roll in history
+      if (state.rollsTotal !== null) {
+        const historyRoll = {
+          dices: state.dices,
+          modifier: state.modifier,
+          rollsTotal: state.rollsTotal,
+        } as IHistoryRoll
+        state.historyRolls.unshift(historyRoll)
+      }
+
+      // Clear
       state.dices = initialDiceState.dices
       state.rollsTotal = initialDiceState.rollsTotal
       state.modifier = initialDiceState.modifier
     },
+
     setModifier: (state, action: PayloadAction<number>) => {
       state.modifier = action.payload
     },
+
     calculateRollsTotal: (state) => {
       const total =
         state.dices.reduce((dSum, d) => {
@@ -87,6 +107,7 @@ export const diceSlice = createSlice({
         }, 0) + state.modifier
       state.rollsTotal = total
     },
+
     saveRoll: (
       state,
       action: PayloadAction<{ name: string; colour: string }>
@@ -106,6 +127,7 @@ export const diceSlice = createSlice({
 
       state.savedRolls.push(roll)
     },
+
     deleteSavedRoll: (state, action: PayloadAction<string>) => {
       const newSavedRolls = state.savedRolls.filter(
         (roll) => roll.name !== action.payload
@@ -114,9 +136,11 @@ export const diceSlice = createSlice({
       setAllSavedRollsStorage(newSavedRolls)
       state.savedRolls = newSavedRolls
     },
+
     setAllSavedRolls: (state, action: PayloadAction<IRoll[]>) => {
       state.savedRolls = action.payload
     },
+
     toggleIsGrid: (state) => {
       state.isGrid = !state.isGrid
     },
@@ -140,6 +164,7 @@ export const modifierAndCalcTotal =
 export const {
   setRolls,
   clearRolls,
+  clearHistory,
   setModifier,
   calculateRollsTotal,
   saveRoll,

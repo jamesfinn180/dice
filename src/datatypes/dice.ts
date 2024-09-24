@@ -27,3 +27,11 @@ interface IRollDices {
   d6?: number
   d4?: number
 }
+
+export interface IHistoryRoll {
+  name?: string
+  colour?: string
+  dices: IDice[]
+  modifier: number
+  rollsTotal: number
+}

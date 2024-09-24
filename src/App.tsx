@@ -9,6 +9,7 @@ import { getSavedRollsStorage } from '@storage/storage'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from './store'
 import { setAllSavedRolls } from '@slices/diceSlice'
+import { HistoryRolls } from '@components/HistoryRolls/HistoryRolls'
 
 const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -24,12 +25,11 @@ const App: React.FC = () => {
       <div className={styles.Page}>
         <DiceGrid />
         <RollsOutput />
+        <HistoryRolls />
         <div className={styles.UIContainer}>
           <div className={styles.Gap} />
           <SavedRolls />
           <UI />
-          {/* SavedRolls */}
-          {/* Reset & Modifier */}
         </div>
       </div>
     </div>

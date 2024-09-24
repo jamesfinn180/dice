@@ -36,7 +36,9 @@
   }
   &_clear {
     grid-column: 3 / 3;
-    grid-row: 1 / span 2;
+  }
+  &_clearHistory {
+    grid-column: 3 / 3;
   }
   &_save {
     grid-column: 1 / 2;
