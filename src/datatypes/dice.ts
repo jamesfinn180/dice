@@ -13,7 +13,7 @@ export interface IDiceRolled {
 }
 
 export interface IRoll {
-  name: string
+  rollName: string
   colour: string
   dices?: IRollDices
   modifier?: number
@@ -29,7 +29,7 @@ interface IRollDices {
 }
 
 export interface IHistoryRoll {
-  name?: string
+  rollName?: string
   colour?: string
   dices: IDice[]
   modifier: number

@@ -3,7 +3,7 @@ import styles from './DiceGrid.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/store'
 import { IDice } from '@datatypes/dice'
-import { d20, d20i, d12, d10, d8, d6, d4 } from '../../assets/img'
+import { d20, d12, d10, d8, d6, d4 } from '../../assets/img'
 import { getRandNum } from '@utils/utils'
 import { rollAndCalcTotal } from '@slices/diceSlice'
 import clsx from 'clsx'
@@ -56,7 +56,6 @@ const Dice: React.FC<IDiceProps> = (props) => {
       </span>
 
       <img className={styles.Dice__Img} src={imgUrls[name]} alt="dice" />
-      {/* <img className={styles.Dice__Img} src={d20i} alt="dice" /> */}
 
       {rolls.length > 0 && (
         <span className={styles.Dice__Result}>{rolls.at(-1)}</span>

@@ -24,6 +24,9 @@ export const HistoryRolls: React.FC = () => {
           })
         return (
           <p key={i} className={styles.HistoryPara}>
+            {hRoll.rollName && (
+              <span className={styles.HistoryTitle}>{hRoll.rollName}:</span>
+            )}
             <DiceNotation dArr={dArr} showSubtotal={false} />
             {hRoll.modifier !== 0 && (
               <ModifierNotation modifier={hRoll.modifier} />

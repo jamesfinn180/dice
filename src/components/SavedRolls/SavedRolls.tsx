@@ -8,6 +8,7 @@ import {
   rollAndCalcTotal,
   deleteSavedRoll,
   clearRolls,
+  setCurrentSavedRollName,
 } from '@slices/diceSlice'
 import { getNumFromDice, getRandNum } from '@utils/utils'
 import clsx from 'clsx'
@@ -18,7 +19,8 @@ export const SavedRolls: React.FC = () => {
 
   const clickSavedRoll = (name: string) => {
     dispatch(clearRolls())
-    const savedRoll = savedRolls.find((roll) => roll.name === name) as IRoll
+    dispatch(setCurrentSavedRollName(name))
+    const savedRoll = savedRolls.find((roll) => roll.rollName === name) as IRoll
 
     dispatch(setModifier(savedRoll.modifier || 0))
 
@@ -47,7 +49,7 @@ export const SavedRolls: React.FC = () => {
         savedRolls.map((roll: IRoll) => {
           return (
             <span
-              key={roll.name}
+              key={roll.rollName}
               className={styles.SavedRoll}
               style={{ background: roll.colour }}
             >
@@ -56,16 +58,16 @@ export const SavedRolls: React.FC = () => {
                   styles.SavedRoll__Btn,
                   styles.SavedRoll__Btn_save
                 )}
-                onClick={() => clickSavedRoll(roll.name)}
+                onClick={() => clickSavedRoll(roll.rollName)}
               >
-                {roll.name}
+                {roll.rollName}
               </button>
               <button
                 className={clsx(
                   styles.SavedRoll__Btn,
                   styles.SavedRoll__Btn_delete
                 )}
-                onClick={() => clickDeleteSave(roll.name)}
+                onClick={() => clickDeleteSave(roll.rollName)}
               >
                 x
               </button>

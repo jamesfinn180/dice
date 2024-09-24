@@ -12,7 +12,7 @@ interface IRollsOutput {
   showTotal?: boolean
 }
 export const RollsOutput: React.FC<IRollsOutput> = (props) => {
-  const { rollsTotal, dices, modifier } = useSelector(
+  const { rollsTotal, dices, modifier, currentSavedRollName } = useSelector(
     (state: RootState) => state.dices
   )
   const { showSubtotal = true, showTotal = true } = props
@@ -22,6 +22,9 @@ export const RollsOutput: React.FC<IRollsOutput> = (props) => {
 
   return (
     <p className={styles.Container}>
+      {currentSavedRollName && (
+        <span className={styles.Outcome__Name}>{currentSavedRollName}:</span>
+      )}
       <DiceNotation dArr={outComes} showSubtotal={showSubtotal} />
       <>{!!modifier && <ModifierNotation modifier={modifier} />}</>
       {showTotal && (

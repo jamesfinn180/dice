@@ -39,7 +39,7 @@
     text-shadow: 2px 2px 0 white;
     font-size: 40px;
     font-weight: 900;
-    font-family: fantasy;
+    font-family: math;
     width: 70px;
   }
 
@@ -59,7 +59,7 @@
     height: 60px;
     margin-left: 40px;
     opacity: 0.3;
-    filter:grayscale(1)
+    filter: grayscale(0) brightness(0);
   }
 
   &__Rolls {

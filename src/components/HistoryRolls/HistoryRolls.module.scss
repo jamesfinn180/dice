@@ -1,6 +1,7 @@
 .HistoryPara {
   display: flex;
   justify-content: right;
+  align-items: center;
   transition: scale(0.8);
   gap: 4px;
   padding-right: 24px;
@@ -11,4 +12,9 @@
 
 .HistoryContainer {
   background: #f3f3f3;
+}
+
+.HistoryTitle {
+  font-size: 14px;
+  margin-right: 5px;
 }

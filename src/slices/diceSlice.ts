@@ -11,6 +11,7 @@ interface IInitialState {
   savedRolls: IRoll[]
   isGrid: boolean
   historyRolls: IHistoryRoll[]
+  currentSavedRollName: string
 }
 
 export const initialDiceState: IInitialState = {
@@ -57,6 +58,7 @@ export const initialDiceState: IInitialState = {
   savedRolls: [],
   isGrid: true,
   historyRolls: [],
+  currentSavedRollName: '',
 }
 
 export const diceSlice = createSlice({
@@ -78,6 +80,7 @@ export const diceSlice = createSlice({
       // Store roll in history
       if (state.rollsTotal !== null) {
         const historyRoll = {
+          rollName: state.currentSavedRollName,
           dices: state.dices,
           modifier: state.modifier,
           rollsTotal: state.rollsTotal,
@@ -86,6 +89,7 @@ export const diceSlice = createSlice({
       }
 
       // Clear
+      state.currentSavedRollName = initialDiceState.currentSavedRollName
       state.dices = initialDiceState.dices
       state.rollsTotal = initialDiceState.rollsTotal
       state.modifier = initialDiceState.modifier
@@ -113,7 +117,7 @@ export const diceSlice = createSlice({
       action: PayloadAction<{ name: string; colour: string }>
     ) => {
       const roll = {} as IRoll
-      roll.name = action.payload.name
+      roll.rollName = action.payload.name
       roll.colour = action.payload.colour
       roll.dices = state.dices
         .map((d) => {
@@ -130,7 +134,7 @@ export const diceSlice = createSlice({
 
     deleteSavedRoll: (state, action: PayloadAction<string>) => {
       const newSavedRolls = state.savedRolls.filter(
-        (roll) => roll.name !== action.payload
+        (roll) => roll.rollName !== action.payload
       )
 
       setAllSavedRollsStorage(newSavedRolls)
@@ -143,6 +147,10 @@ export const diceSlice = createSlice({
 
     toggleIsGrid: (state) => {
       state.isGrid = !state.isGrid
+    },
+
+    setCurrentSavedRollName: (state, action: PayloadAction<string>) => {
+      state.currentSavedRollName = action.payload
     },
   },
 })
@@ -171,6 +179,7 @@ export const {
   setAllSavedRolls,
   deleteSavedRoll,
   toggleIsGrid,
+  setCurrentSavedRollName,
 } = diceSlice.actions
 
 export default diceSlice.reducer
