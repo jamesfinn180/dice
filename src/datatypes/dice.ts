@@ -29,6 +29,7 @@ interface IRollDices {
 }
 
 export interface IHistoryRoll {
+  id: string
   rollName?: string
   colour?: string
   dices: IDice[]

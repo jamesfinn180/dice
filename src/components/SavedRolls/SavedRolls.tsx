@@ -11,6 +11,7 @@ import {
   setCurrentSavedRollName,
 } from '@slices/diceSlice'
 import { getNumFromDice, getRandNum } from '@utils/utils'
+import { motion, AnimatePresence } from 'framer-motion'
 import clsx from 'clsx'
 
 export const SavedRolls: React.FC = () => {
@@ -45,35 +46,40 @@ export const SavedRolls: React.FC = () => {
 
   return (
     <div className={styles.Container}>
-      {savedRolls.length > 0 &&
-        savedRolls.map((roll: IRoll) => {
-          return (
-            <span
-              key={roll.rollName}
-              className={styles.SavedRoll}
-              style={{ background: roll.colour }}
-            >
-              <button
-                className={clsx(
-                  styles.SavedRoll__Btn,
-                  styles.SavedRoll__Btn_save
-                )}
-                onClick={() => clickSavedRoll(roll.rollName)}
+      <AnimatePresence>
+        {savedRolls.length > 0 &&
+          savedRolls.map((roll: IRoll) => {
+            return (
+              <motion.span
+                key={roll.rollName}
+                exit={{ width: 0 }}
+                animate={{ width: 'auto' }}
+                transition={{ duration: 0.3 }}
+                className={styles.SavedRoll}
+                style={{ background: roll.colour }}
               >
-                {roll.rollName}
-              </button>
-              <button
-                className={clsx(
-                  styles.SavedRoll__Btn,
-                  styles.SavedRoll__Btn_delete
-                )}
-                onClick={() => clickDeleteSave(roll.rollName)}
-              >
-                x
-              </button>
-            </span>
-          )
-        })}
+                <button
+                  className={clsx(
+                    styles.SavedRoll__Btn,
+                    styles.SavedRoll__Btn_save
+                  )}
+                  onClick={() => clickSavedRoll(roll.rollName)}
+                >
+                  {roll.rollName}
+                </button>
+                <button
+                  className={clsx(
+                    styles.SavedRoll__Btn,
+                    styles.SavedRoll__Btn_delete
+                  )}
+                  onClick={() => clickDeleteSave(roll.rollName)}
+                >
+                  x
+                </button>
+              </motion.span>
+            )
+          })}
+      </AnimatePresence>
     </div>
   )
 }

@@ -9,15 +9,10 @@
   margin: 10px 0;
   transform-origin: right;
   transform: scale(0.8);
-
-  &_anim {
-    transform: scale(0);
-    animation: 0.75s slideGrow forwards;
-  }
 }
 
 .HistoryContainer {
-  background: #f3f3f3;
+  overflow: hidden;
 }
 
 .HistoryTitle {

@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getDiceColour } from '@utils/utils'
 import { AppThunk } from '../store'
 import { setAllSavedRollsStorage, setSavedRollsStorage } from '@storage/storage'
+import { v4 as uuid } from 'uuid'
 
 interface IInitialState {
   dices: IDice[]
@@ -80,6 +81,7 @@ export const diceSlice = createSlice({
       // Store roll in history
       if (state.rollsTotal !== null) {
         const historyRoll = {
+          id: uuid(),
           rollName: state.currentSavedRollName,
           dices: state.dices,
           modifier: state.modifier,

@@ -13,6 +13,8 @@
   }
 }
 
+$diceImgSize: 60px;
+
 .Dice {
   position: relative;
   width: 100%;
@@ -64,22 +66,24 @@
   &__Img {
     position: absolute;
     top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    height: 60px;
-    margin-left: 40px;
+    left: 50%;
+    margin-top: -$diceImgSize/2;
+    margin-left: -$diceImgSize/2;
+    height: $diceImgSize;
+    width: $diceImgSize;
     opacity: 0.3;
     filter: grayscale(0) brightness(0);
 
     &_flat {
-      margin: 0;
-      left: 50%;
       transform: translateX(-50%) translateY(-50%);
     }
   }
 
   &__Rolls {
-    width: 70px;
+    font-size: 15px;
+    text-shadow: 1px 1px 4px white;
+    width: 100%;
+    max-width: 70px;
 
     &_flat {
       text-align: center;
@@ -89,6 +93,7 @@
 
     &__Total {
       font-weight: 900;
+      font-size: 16px;
     }
   }
 }
