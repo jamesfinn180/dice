@@ -1,6 +1,7 @@
 export const APP_LOCAL_STORAGE_PREFIX = 'diceApp_'
 
 export const revealAnimDelay = 0.3
+export const modalAnimTime = 0.4
 
 export const COLOURS = [
   ['a074c2', 'cf84cb', 'E39EC1', 'DEBAC0', 'B9B1AD', '94A89A'], // green to purple

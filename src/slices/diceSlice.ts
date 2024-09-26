@@ -14,6 +14,7 @@ interface IInitialState {
   historyRolls: IHistoryRoll[]
   currentSavedRollName: string
   swatchIndex: number
+  isAudio: boolean
 }
 
 export const initialDiceState: IInitialState = {
@@ -56,6 +57,7 @@ export const initialDiceState: IInitialState = {
   historyRolls: [],
   currentSavedRollName: '',
   swatchIndex: 0,
+  isAudio: true,
 }
 
 export const diceSlice = createSlice({
@@ -156,6 +158,10 @@ export const diceSlice = createSlice({
         state.swatchIndex === COLOURS.length - 1 ? 0 : state.swatchIndex + 1
       state.swatchIndex = newSwatchIndex
     },
+
+    toggleAudio: (state) => {
+      state.isAudio = !state.isAudio
+    },
   },
 })
 
@@ -185,6 +191,7 @@ export const {
   toggleIsGrid,
   setCurrentSavedRollName,
   updateSwatch,
+  toggleAudio,
 } = diceSlice.actions
 
 export default diceSlice.reducer

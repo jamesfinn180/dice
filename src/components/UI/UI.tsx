@@ -9,20 +9,29 @@ import {
   saveRoll,
   toggleIsGrid,
   updateSwatch,
+  toggleAudio,
 } from '@slices/diceSlice'
 import { SelectBox } from '@components/SelectBox/SelectBox'
 import { Modal } from '@components/Modal/Modal'
 import { RollsOutput } from '@components/RollsOutput/RollsOutput'
+import { RxRows, RxColumns } from 'react-icons/rx'
+import { BiVolumeMute, BiVolumeFull } from 'react-icons/bi'
+import { getDiceColour } from '@utils/utils'
+import { COLOURS } from '@consts/consts'
 
 export const UI: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [showModal, setShowModal] = useState<boolean>(false)
-  const { rollsTotal, isGrid, historyRolls } = useSelector(
-    (state: RootState) => state.dices
-  )
+  const { rollsTotal, isGrid, historyRolls, swatchIndex, isAudio } =
+    useSelector((state: RootState) => state.dices)
   const closeModal = () => {
     setShowModal(false)
   }
+  const [nextSwatch, setNextSwatch] = useState(1)
+
+  useEffect(() => {
+    setNextSwatch(swatchIndex === COLOURS.length - 1 ? 0 : swatchIndex + 1)
+  }, [swatchIndex])
 
   return (
     <div className={styles.Container}>
@@ -33,7 +42,30 @@ export const UI: React.FC = () => {
         className={clsx(styles.Button, styles.Button_swatch)}
         onClick={() => dispatch(updateSwatch())}
       >
-        Colour
+        <span
+          style={{ background: getDiceColour('d20', nextSwatch) }}
+          className={styles.ColourBlock}
+        ></span>
+        <span
+          style={{ background: getDiceColour('d12', nextSwatch) }}
+          className={styles.ColourBlock}
+        ></span>
+        <span
+          style={{ background: getDiceColour('d10', nextSwatch) }}
+          className={styles.ColourBlock}
+        ></span>
+        <span
+          style={{ background: getDiceColour('d8', nextSwatch) }}
+          className={styles.ColourBlock}
+        ></span>
+        <span
+          style={{ background: getDiceColour('d6', nextSwatch) }}
+          className={styles.ColourBlock}
+        ></span>
+        <span
+          style={{ background: getDiceColour('d4', nextSwatch) }}
+          className={styles.ColourBlock}
+        ></span>
       </button>
       <SelectBox />
 
@@ -51,7 +83,20 @@ export const UI: React.FC = () => {
           dispatch(toggleIsGrid())
         }}
       >
-        {isGrid ? 'Rows' : 'Cols'}
+        {isGrid ? <RxRows /> : <RxColumns />}
+      </button>
+
+      <button
+        className={clsx(styles.Button, styles.Button_audio)}
+        onClick={() => {
+          dispatch(toggleAudio())
+        }}
+      >
+        {isAudio ? (
+          <BiVolumeFull style={{ fontSize: '18px' }} />
+        ) : (
+          <BiVolumeMute style={{ fontSize: '18px' }} />
+        )}
       </button>
 
       <button
@@ -89,7 +134,7 @@ const SaveModal: React.FC<ISaveModal> = (props) => {
   const dispatch = useDispatch<AppDispatch>()
   const [inputValue, setInputValue] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
-  const [saveColour, setSaveColour] = useState('black')
+  const [saveColour, setSaveColour] = useState('#cf4646')
 
   const radioHighlight = '0 0 0 2px white, 0 0 0 4px red'
   const colours = [
@@ -124,7 +169,7 @@ const SaveModal: React.FC<ISaveModal> = (props) => {
           <input
             type="text"
             className={styles.Input}
-            placeholder="Type roll name"
+            placeholder="roll name"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             ref={inputRef}

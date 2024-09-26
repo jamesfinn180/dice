@@ -14,7 +14,7 @@ import useSFX from '@hooks/useSFX'
 
 const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const { rollsTotal } = useSelector((state: RootState) => state.dices)
+  const { rollsTotal, isAudio } = useSelector((state: RootState) => state.dices)
   useFullHeight()
   const { play } = useSFX()
 
@@ -24,10 +24,10 @@ const App: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    if (rollsTotal !== null) {
+    if (rollsTotal !== null && isAudio) {
       play()
     }
-  }, [rollsTotal])
+  }, [rollsTotal, isAudio])
 
   return (
     <div className={styles.App}>

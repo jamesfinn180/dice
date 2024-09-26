@@ -29,7 +29,11 @@ export const DiceNotation: React.FC<IDiceNotation> = (props) => {
                 {d.name}
               </span>
 
-              {showSubtotal && <span>[{sumArray(d.rolls)}]</span>}
+              {showSubtotal && (
+                <span className={styles.Outcome__Subtitle}>
+                  [{sumArray(d.rolls)}]
+                </span>
+              )}
             </span>
             {i !== dLength - 1 && ' + '}
           </span>
