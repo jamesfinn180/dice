@@ -1,19 +1,21 @@
+import { COLOURS } from '@consts/consts'
 import { DiceNames } from '@datatypes/dice'
 
-export const getDiceColour = (dice: string) => {
+export const getDiceColour = (dice: string, swatchInd: number) => {
+  const swatch = COLOURS[swatchInd]
   switch (dice) {
     case 'd20':
-      return '#845ec2'
+      return '#' + swatch[0]
     case 'd12':
-      return '#d65db1'
+      return '#' + swatch[1]
     case 'd10':
-      return '#ff6f91'
+      return '#' + swatch[2]
     case 'd8':
-      return '#ff9671'
+      return '#' + swatch[3]
     case 'd6':
-      return '#ffc75f'
+      return '#' + swatch[4]
     case 'd4':
-      return '#ade968'
+      return '#' + swatch[5]
     default:
       return '#000'
   }

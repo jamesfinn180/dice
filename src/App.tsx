@@ -6,19 +6,28 @@ import { UI } from '@components/UI/UI'
 import useFullHeight from '@hooks/useHullHeight'
 import { SavedRolls } from '@components/SavedRolls/SavedRolls'
 import { getSavedRollsStorage } from '@storage/storage'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from './store'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from './store'
 import { setAllSavedRolls } from '@slices/diceSlice'
 import { HistoryRolls } from '@components/HistoryRolls/HistoryRolls'
+import useSFX from '@hooks/useSFX'
 
 const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
+  const { rollsTotal } = useSelector((state: RootState) => state.dices)
   useFullHeight()
+  const { play } = useSFX()
 
   useEffect(() => {
     const initialSavedRolls = getSavedRollsStorage()
     dispatch(setAllSavedRolls(initialSavedRolls))
   }, [])
+
+  useEffect(() => {
+    if (rollsTotal !== null) {
+      play()
+    }
+  }, [rollsTotal])
 
   return (
     <div className={styles.App}>

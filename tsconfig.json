@@ -29,7 +29,10 @@
       "@styles/*": ["src/styles/*"],
       "@storage/*": ["src/storage/*"],
       "@hooks/*": ["src/hooks/*"],
-    }
+    },
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
   },
   "include": [
     "src"

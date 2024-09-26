@@ -8,6 +8,7 @@ import {
   clearHistory,
   saveRoll,
   toggleIsGrid,
+  updateSwatch,
 } from '@slices/diceSlice'
 import { SelectBox } from '@components/SelectBox/SelectBox'
 import { Modal } from '@components/Modal/Modal'
@@ -26,6 +27,14 @@ export const UI: React.FC = () => {
   return (
     <div className={styles.Container}>
       {/* Modifier */}
+      {/* ROW 1 */}
+
+      <button
+        className={clsx(styles.Button, styles.Button_swatch)}
+        onClick={() => dispatch(updateSwatch())}
+      >
+        Colour
+      </button>
       <SelectBox />
 
       <button
@@ -33,6 +42,16 @@ export const UI: React.FC = () => {
         onClick={() => dispatch(clearRolls())}
       >
         Clear
+      </button>
+
+      {/*  ROW 2*/}
+      <button
+        className={clsx(styles.Button, styles.Button_grid)}
+        onClick={() => {
+          dispatch(toggleIsGrid())
+        }}
+      >
+        {isGrid ? 'Rows' : 'Cols'}
       </button>
 
       <button
@@ -43,15 +62,6 @@ export const UI: React.FC = () => {
         }}
       >
         Save Roll
-      </button>
-
-      <button
-        className={clsx(styles.Button, styles.Button_grid)}
-        onClick={() => {
-          dispatch(toggleIsGrid())
-        }}
-      >
-        {isGrid ? 'Rows' : 'Grids'}
       </button>
 
       <button

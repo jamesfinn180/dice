@@ -2,6 +2,8 @@ import React from 'react'
 import styles from './DiceNotation.module.scss'
 import { IDice } from '@datatypes/dice'
 import { getDiceColour, sumArray } from '@utils/utils'
+import { RootState } from 'src/store'
+import { useSelector } from 'react-redux'
 
 interface IDiceNotation {
   dArr: IDice[]
@@ -9,6 +11,7 @@ interface IDiceNotation {
 }
 export const DiceNotation: React.FC<IDiceNotation> = (props) => {
   const { dArr, showSubtotal = true } = props
+  const { swatchIndex } = useSelector((state: RootState) => state.dices)
   const dLength = dArr.length
 
   return (
@@ -19,7 +22,7 @@ export const DiceNotation: React.FC<IDiceNotation> = (props) => {
           <span key={d.name}>
             <span
               className={styles.Outcome}
-              style={{ borderColor: getDiceColour(d.name) }}
+              style={{ borderColor: getDiceColour(d.name, swatchIndex) }}
             >
               <span className={styles.Outcome__Label}>
                 {rollsLength}

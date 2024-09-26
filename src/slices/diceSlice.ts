@@ -1,9 +1,9 @@
 import { IDice, IDiceRolled, IRoll, IHistoryRoll } from '@datatypes/dice'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getDiceColour } from '@utils/utils'
 import { AppThunk } from '../store'
 import { setAllSavedRollsStorage, setSavedRollsStorage } from '@storage/storage'
 import { v4 as uuid } from 'uuid'
+import { COLOURS } from '@consts/consts'
 
 interface IInitialState {
   dices: IDice[]
@@ -13,6 +13,7 @@ interface IInitialState {
   isGrid: boolean
   historyRolls: IHistoryRoll[]
   currentSavedRollName: string
+  swatchIndex: number
 }
 
 export const initialDiceState: IInitialState = {
@@ -21,37 +22,31 @@ export const initialDiceState: IInitialState = {
       name: 'd20',
       num: 20,
       rolls: [],
-      colour: getDiceColour('d20'),
     },
     {
       name: 'd12',
       num: 12,
       rolls: [],
-      colour: getDiceColour('d12'),
     },
     {
       name: 'd10',
       num: 10,
       rolls: [],
-      colour: getDiceColour('d10'),
     },
     {
       name: 'd8',
       num: 8,
       rolls: [],
-      colour: getDiceColour('d8'),
     },
     {
       name: 'd6',
       num: 6,
       rolls: [],
-      colour: getDiceColour('d6'),
     },
     {
       name: 'd4',
       num: 4,
       rolls: [],
-      colour: getDiceColour('d4'),
     },
   ],
   rollsTotal: null,
@@ -60,6 +55,7 @@ export const initialDiceState: IInitialState = {
   isGrid: true,
   historyRolls: [],
   currentSavedRollName: '',
+  swatchIndex: 0,
 }
 
 export const diceSlice = createSlice({
@@ -154,6 +150,12 @@ export const diceSlice = createSlice({
     setCurrentSavedRollName: (state, action: PayloadAction<string>) => {
       state.currentSavedRollName = action.payload
     },
+
+    updateSwatch: (state) => {
+      const newSwatchIndex =
+        state.swatchIndex === COLOURS.length - 1 ? 0 : state.swatchIndex + 1
+      state.swatchIndex = newSwatchIndex
+    },
   },
 })
 
@@ -182,6 +184,7 @@ export const {
   deleteSavedRoll,
   toggleIsGrid,
   setCurrentSavedRollName,
+  updateSwatch,
 } = diceSlice.actions
 
 export default diceSlice.reducer

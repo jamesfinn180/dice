@@ -1,17 +1,23 @@
 * {
   box-sizing: border-box;
+  font-family: Trebuchet MS, sans-serif;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Trebuchet MS, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+// This is not working for some reason
+@mixin boxShadowInset($bCol1: white, $bCol2: black, $bSize1: 1px, $bSize2: 2px) {
+  box-shadow: 
+    inset $bSize1, $bSize1, 0, $bCol1,
+    inset -$bSize1 $bSize1 0 $bCol1,
+    inset $bSize1  -$bSize1 0 $bCol1,
+    inset -$bSize1  -$bSize1 0 $bCol1,
+    inset $bSize2 $bSize2 0 $bCol2,
+    inset -$bSize2 $bSize2 0 $bCol2,
+    inset $bSize2  -$bSize2 0 $bCol2,
+    inset -$bSize2  -$bSize2 0 $bCol2;
 }

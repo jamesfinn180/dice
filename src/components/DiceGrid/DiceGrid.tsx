@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import styles from './DiceGrid.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/store'
 import { IDice } from '@datatypes/dice'
 import { d20, d12, d10, d8, d6, d4 } from '../../assets/img'
-import { getRandNum } from '@utils/utils'
+import { getDiceColour, getRandNum } from '@utils/utils'
 import { rollAndCalcTotal } from '@slices/diceSlice'
 import clsx from 'clsx'
 import { motion } from 'framer-motion'
@@ -20,14 +20,23 @@ const imgUrls = {
 }
 
 export const DiceGrid: React.FC = () => {
-  const { dices, isGrid } = useSelector((state: RootState) => state.dices)
+  const { dices, isGrid, swatchIndex } = useSelector(
+    (state: RootState) => state.dices
+  )
 
   return (
     <div
       className={clsx(styles.Container, { [styles.Container_flat]: isGrid })}
     >
       {dices.map((d: IDice) => {
-        return <Dice key={d.name} dice={d} isGrid={isGrid} />
+        return (
+          <Dice
+            key={d.name}
+            dice={d}
+            isGrid={isGrid}
+            swatchIndex={swatchIndex}
+          />
+        )
       })}
     </div>
   )
@@ -36,12 +45,17 @@ export const DiceGrid: React.FC = () => {
 interface IDiceProps {
   dice: IDice
   isGrid: boolean
+  swatchIndex: number
 }
 const Dice: React.FC<IDiceProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>()
-  const { dice, isGrid } = props
-  const { name, rolls, num, colour } = dice
+  const { dice, isGrid, swatchIndex } = props
+  const { name, rolls, num } = dice
   const [animTrigger, setAnimTrigger] = useState(0)
+  const colour = useMemo(
+    () => getDiceColour(name, swatchIndex),
+    [name, swatchIndex]
+  )
 
   useEffect(() => {
     if (dice.rolls.length > 0) {
