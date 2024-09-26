@@ -27,8 +27,7 @@ $diceImgSize: 60px;
   background: white;
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.2s;
-  transition: background 0.5s;
+  transition: all 0.4s, background 0.9s;
 
   &:active {
     opacity: 0.8;
