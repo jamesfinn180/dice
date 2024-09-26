@@ -15,4 +15,4 @@ export const COLOURS = [
 
 export const VOLUME = 0.7
 
-export const HISTORY_AMOUNT_BUFFER = 4
+export const HISTORY_AMOUNT_BUFFER = 5
