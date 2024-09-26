@@ -11,10 +11,11 @@ import { AppDispatch, RootState } from './store'
 import { setAllSavedRolls } from '@slices/diceSlice'
 import { HistoryRolls } from '@components/HistoryRolls/HistoryRolls'
 import useSFX from '@hooks/useSFX'
+import { diceHasRolled } from '@utils/utils'
 
 const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const { rollsTotal, isAudio } = useSelector((state: RootState) => state.dices)
+  const { isAudio, dices } = useSelector((state: RootState) => state.dices)
   useFullHeight()
   const { play } = useSFX()
 
@@ -24,10 +25,10 @@ const App: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    if (rollsTotal !== null && isAudio) {
+    if (diceHasRolled(dices) && isAudio) {
       play()
     }
-  }, [rollsTotal, isAudio])
+  }, [dices, isAudio])
 
   return (
     <div className={styles.App}>

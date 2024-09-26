@@ -27,10 +27,12 @@ $diceImgSize: 60px;
   background: white;
   cursor: pointer;
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
   transition: all 0.4s, background 0.9s;
 
   &:active {
-    opacity: 0.8;
+    opacity: 0.7;
+    background-color: black !important;
   }
 
   &_flat {
