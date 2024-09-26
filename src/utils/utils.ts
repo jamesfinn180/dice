@@ -1,5 +1,5 @@
 import { COLOURS } from '@consts/consts'
-import { DiceNames } from '@datatypes/dice'
+import { DiceNames, IDice } from '@datatypes/dice'
 
 export const getDiceColour = (dice: string, swatchInd: number) => {
   const swatch = COLOURS[swatchInd]
@@ -30,4 +30,8 @@ export const sumArray = (arr: number[]): number =>
 
 export const getNumFromDice = (diceName: DiceNames): number => {
   return parseInt(diceName.slice(1))
+}
+
+export const diceHasRolled = (dices: IDice[]): boolean => {
+  return dices.some((d: IDice) => d.rolls.length > 0)
 }

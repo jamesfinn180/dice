@@ -4,6 +4,7 @@ import { AppThunk } from '../store'
 import { setAllSavedRollsStorage, setSavedRollsStorage } from '@storage/storage'
 import { v4 as uuid } from 'uuid'
 import { COLOURS } from '@consts/consts'
+import { diceHasRolled } from '@utils/utils'
 
 interface IInitialState {
   dices: IDice[]
@@ -77,7 +78,7 @@ export const diceSlice = createSlice({
 
     clearRolls: (state) => {
       // Store roll in history
-      if (state.rollsTotal !== null) {
+      if (state.rollsTotal !== null && diceHasRolled(state.dices)) {
         const historyRoll = {
           id: uuid(),
           rollName: state.currentSavedRollName,
@@ -127,6 +128,7 @@ export const diceSlice = createSlice({
           return { ...acc, ...current }
         })
       roll.modifier = state.modifier
+
       setSavedRollsStorage(roll)
 
       state.savedRolls.push(roll)

@@ -21,9 +21,6 @@ body {
     inset -$bSize2  -$bSize2 0 $bCol2;
 }
 
-$p1: 3px;
-$p2: 4px;
-
 %ButtonStyle {
   display: flex;
   align-items: center;
@@ -33,7 +30,7 @@ $p2: 4px;
   font-family: Trebuchet MS, sans-serif;
   background: white;
   color: black;
-  font-weight: 200;
+  font-weight: 500;
   border: solid 2px #000000;
   padding: 0;
   box-shadow:   

@@ -120,7 +120,7 @@ const Dice: React.FC<IDiceProps> = (props) => {
             <>
               {rolls.join(', ')} <br />
               <span className={styles.Dice__Rolls__Total}>
-                [ {rolls.reduce((a, b) => a + b)} ]
+                [ {rolls.reduce((a, b) => a + b, 0)} ]
               </span>
             </>
           )}

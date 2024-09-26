@@ -16,22 +16,28 @@ import { Modal } from '@components/Modal/Modal'
 import { RollsOutput } from '@components/RollsOutput/RollsOutput'
 import { RxRows, RxColumns } from 'react-icons/rx'
 import { BiVolumeMute, BiVolumeFull } from 'react-icons/bi'
-import { getDiceColour } from '@utils/utils'
+import { diceHasRolled, getDiceColour } from '@utils/utils'
 import { COLOURS } from '@consts/consts'
 
 export const UI: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [showModal, setShowModal] = useState<boolean>(false)
-  const { rollsTotal, isGrid, historyRolls, swatchIndex, isAudio } =
-    useSelector((state: RootState) => state.dices)
+  const { isGrid, historyRolls, swatchIndex, isAudio, dices } = useSelector(
+    (state: RootState) => state.dices
+  )
   const closeModal = () => {
     setShowModal(false)
   }
   const [nextSwatch, setNextSwatch] = useState(1)
+  const [diceHaveRolled, setDiceHaveRolled] = useState(false)
 
   useEffect(() => {
     setNextSwatch(swatchIndex === COLOURS.length - 1 ? 0 : swatchIndex + 1)
   }, [swatchIndex])
+
+  useEffect(() => {
+    setDiceHaveRolled(diceHasRolled(dices))
+  }, [dices])
 
   return (
     <div className={styles.Container}>
@@ -101,7 +107,7 @@ export const UI: React.FC = () => {
 
       <button
         className={clsx(styles.Button, styles.Button_save)}
-        disabled={rollsTotal === null}
+        disabled={!diceHaveRolled}
         onClick={() => {
           setShowModal(true)
         }}

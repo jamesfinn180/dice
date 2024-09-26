@@ -23,7 +23,7 @@ export const HistoryRolls: React.FC = () => {
           })
           .reduce((acc, current) => {
             return { ...acc, ...current }
-          })
+          }, {})
         return (
           <motion.div
             key={hRoll.id}
