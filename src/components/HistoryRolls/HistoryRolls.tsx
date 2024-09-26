@@ -31,7 +31,7 @@ export const HistoryRolls: React.FC = () => {
               key={hRoll.id}
               initial={{ opacity: 0, x: -200, height: 0 }}
               exit={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, x: 0, height: 25 }}
+              animate={{ opacity: 1, x: 0, height: 28 }}
             >
               <p className={clsx(styles.HistoryPara)}>
                 {hRoll.rollName && (
