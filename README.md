@@ -1,6 +1,6 @@
-# James Boilerplate Template
+# DnD Dice App
 
-Sets up a project with Create React App, TypeScript, Redux, SASS modules, Jest, React Testing Library, Craco for imports and ESlint and Prettier for 
+Project built with Create React App, TypeScript, Redux and SASS modules. This app allows you to roll your dice, save important rolls for ease of use and look back over your past rolls. A big focus of this mobile app is design and usability. The amount of information needed to display for a DnD session can be large however I used animations, layouts and UX techniques to make this app both very functional and fun to use.
 
 ## Available Scripts
 
@@ -38,13 +38,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-### `npm run deploy -- -m "Message"`
-
-Deploys the app live on GitHub Pages. Ensure the package.json has homepage prop with the URL pointing to {address}/project-name
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
