@@ -2,6 +2,8 @@
 
 Project built with Create React App, TypeScript, Redux and SASS modules. This app allows you to roll your dice, save important rolls for ease of use and look back over your past rolls. A big focus of this mobile app is design and usability. The amount of information needed to display for a DnD session can be large however I used animations, layouts and UX techniques to make this app both very functional and fun to use.
 
+Feel free to play with it live at [James Dice App](https://jamesfinn180.github.io/dice/)
+
 ## Available Scripts
 
 In the project directory, you can run:
